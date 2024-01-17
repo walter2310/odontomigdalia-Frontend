@@ -1,0 +1,84 @@
+---
+import BentoItem from "./BentoItem.astro";
+---
+
+<section
+  class={`
+
+    w-full max-w-[920px]
+    grid grid-cols-10 auto-rows-[30rem] gap-4
+    mx-auto p-4
+`}
+>
+  <BentoItem class="col-span-10 md:col-span-6" title="ORTODONCIA">
+    <div
+      slot="image"
+      class="absolute left-0 right-0 bottom-0 h-full
+      group-hover:scale-110 transition-scale duration-1000 ease-in-out
+      opacity-90 bg-center bg-blend-luminosity bg-cover bg-no-repeat -z-10"
+      style="background-image: url('/public/ortodoncia.webp')"
+    >
+    </div>
+    <p slot="content" class="max-w-xl text-white">
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad fugiat
+      corrupti voluptatum impedit, laborum reprehenderit unde assumenda maiores
+      blanditiis dolorem quaerat dignissimos minima laudantium optio? A
+      asperiores quo distinctio voluptate.
+    </p>
+  </BentoItem>
+  <BentoItem
+    class="col-span-10 md:col-span-4 cursor-pointer"
+    title="TRATAMIENTO DE CARIES"
+  >
+    <div
+      slot="image"
+      class="absolute left-0 right-0 bottom-0 h-full
+    group-hover:scale-110 transition-scale duration-1000 ease-in-out
+    opacity-90 bg-center bg-blend-luminosity bg-cover bg-no-repeat -z-10"
+      style="background-image: url('/public/ortodoncia.webp')"
+    >
+    </div>
+    <p slot="content" class="max-w-xl text-white">
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad fugiat
+      corrupti voluptatum impedit, laborum reprehenderit unde assumenda maiores
+      blanditiis dolorem quaerat dignissimos minima laudantium optio? A
+      asperiores quo distinctio voluptate.
+    </p>
+  </BentoItem>
+  <BentoItem class="col-span-10 md:col-span-4 cursor-pointer" title="LIMPIEZA">
+    <div
+      slot="image"
+      class="absolute left-0 right-0 bottom-0 h-full
+    group-hover:scale-110 transition-scale duration-1000 ease-in-out
+    opacity-90 bg-center bg-blend-luminosity bg-cover bg-no-repeat -z-10"
+      style="background-image: url('/public/limpieza.webp')"
+    >
+    </div>
+    <p slot="content" class="max-w-xl text-white cursor-pointer">
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad fugiat
+      corrupti voluptatum impedit, laborum reprehenderit unde assumenda maiores
+      blanditiis dolorem quaerat dignissimos minima laudantium optio? A
+      asperiores quo distinctio voluptate.
+    </p>
+  </BentoItem>
+
+  <BentoItem
+    class="col-span-10 md:col-span-6 cursor-pointer"
+    title="COLOCACIÓN DE BOTOX"
+  >
+    <div
+      slot="image"
+      class="absolute left-0 right-0 bottom-0 h-full
+    group-hover:scale-110 transition-scale duration-1000 ease-in-out
+    opacity-90 bg-center bg-blend-luminosity bg-cover bg-no-repeat -z-10"
+      style="background-image: url('/public/botox.webp')"
+    >
+    </div>
+    <p slot="content" class="max-w-xl text-white">
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad fugiat
+      corrupti voluptatum impedit, laborum reprehenderit unde assumenda maiores
+      blanditiis dolorem quaerat dignissimos minima laudantium optio? A
+      asperiores quo distinctio voluptate.
+    </p>
+  </BentoItem>
+</section>

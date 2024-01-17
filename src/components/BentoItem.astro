@@ -1,0 +1,27 @@
+---
+const { title } = Astro.props;
+---
+
+<article
+  class={`
+    ${Astro.props.class}
+    col-span-5
+    relative rounded-xl
+    backdrop-blur-md
+    border border-black/10
+    shadow-inner shadow-white/20
+    overflow-hidden
+    group
+    flex flex-col
+  `}
+>
+  <slot name="image" />
+
+  <div
+    class="select-none flex flex-col gap-2 px-4 text-lg mt-3 justify-end flex-grow"
+  >
+    <h2 class="text-2xl text-white font-bold">{title}</h2>
+
+    <slot name="content" />
+  </div>
+</article>

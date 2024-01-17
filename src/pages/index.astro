@@ -4,6 +4,8 @@ import LinkedIn from "../icons/LinkedIn.astro";
 import Instagram from "../icons/Instagram.astro";
 import SocialPill from "../components/SocialPill.astro";
 import Layout from "../layouts/Layout.astro";
+import ProfessionalProfile from "../components/ProfessionalProfile.astro";
+import Bento from "../components/Bento.astro";
 ---
 
 <Layout title="Welcome to Astro.">
@@ -11,19 +13,29 @@ import Layout from "../layouts/Layout.astro";
     <Header />
 
     <section class="w-full mx-auto lg:w-[700px] py-40">
-      <img src="/perfil.jpg" alt="doctora" class="rounded-full w-24 h-24" />
+      <img src="/perfil.webp" alt="doctora" class="rounded-full size-36" />
       <h1 class="text-5xl text-white font-bold py-2">Dra. Migdalia Guerra</h1>
       <h3 class="text-3xl text-[#ED1CA7] font-bold pg-2">
         Odontología y estética
       </h3>
       <h4 class="text-2xl text-white font-bold pg-3">Maturin - Venezuela</h4>
 
-      <nav class="flex gap-x-2">
+      <nav class="flex gap-x-3">
         <SocialPill href="https://www.instagram.com/odontomigdaliaguerra/">
           <Instagram class="w-6 h-6" />
           Instagram
         </SocialPill>
       </nav>
     </section>
+
+    <div class="w-full mx-auto lg:w-[700px] py-4">
+      <h2 class="text-white text-4xl font-bold -ml-20">Servicios</h2>
+    </div>
+    <Bento />
+
+    <div class="w-full mx-auto lg:w-[700px] py-4 mt-20">
+      <h2 class="text-white text-4xl font-bold -ml-20">Perfil Profesional</h2>
+    </div>
+    <ProfessionalProfile />
   </main>
 </Layout>
