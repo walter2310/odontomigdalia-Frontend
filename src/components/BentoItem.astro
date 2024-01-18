@@ -20,8 +20,11 @@ const { title } = Astro.props;
   <div
     class="select-none flex flex-col gap-2 px-4 text-lg mt-3 justify-end flex-grow"
   >
-    <h2 class="text-2xl text-white font-bold">{title}</h2>
+    <h2 class="text-3xl text-white font-bold mb-3">{title}</h2>
 
-    <slot name="content" />
+    <slot
+      name="content"
+      class="transform transition-all translate-y-3 opacity-0 group-hover:translate-y-0 group-hover:opacity-100"
+    />
   </div>
 </article>

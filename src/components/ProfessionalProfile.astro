@@ -1,18 +1,39 @@
+---
+import LinkedIn from "../icons/LinkedIn.astro";
+import SocialPill from "./SocialPill.astro";
+---
+
 <article class="w-full mx-auto lg:w-[700px] py-5">
-  <div class="flex flex-row justify-center items-center">
-    <img src="/profesional.jpg" alt="doctora" class="rounded-md w-64 h-128" />
-    <div class="[&>p]:mb-4 flex flex-col">
-      <p class="text-white px-5">
+  <div class="flex flex-col items-center md:flex-row md:justify-center">
+    <img
+      src="/profesional.jpg"
+      alt="doctora"
+      class="rounded-md w-full md:w-[300px] h-128 md:mr-8"
+    />
+    <div class="flex flex-col">
+      <p class="text-white px-5 mb-2 md:mt-4">
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eligendi ipsum
         magnam enim quia voluptatum nemo debitis praesentium, animi quod nam
         nostrum incidunt quas omnis? Et ut quae nam non accusantium.
       </p>
 
-      <p class="text-white px-5">
+      <p class="text-white px-5 mb-2">
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eligendi ipsum
         magnam enim quia voluptatum nemo debitis praesentium, animi quod nam
         nostrum incidunt quas omnis? Et ut quae nam non accusantium.
       </p>
+
+      <p class="text-white px-5 mb-2">
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eligendi ipsum
+        magnam enim quia voluptatum nemo debitis praesentium, animi quod nam
+        nostrum incidunt quas omnis? Et ut quae nam non accusantium.
+      </p>
+      <nav class="flex gap-x-3 mt-2 ml-5">
+        <SocialPill>
+          <LinkedIn class="w-6 h-6" />
+          LinkedIn
+        </SocialPill>
+      </nav>
     </div>
   </div>
 </article>
