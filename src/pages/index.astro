@@ -63,13 +63,32 @@ import ScheduleAppointment from "../components/ScheduleAppointment.astro";
     </div>
     <ProfessionalProfile />
 
-    <div class="w-full mx-auto lg:w-[700px] py-4 mt-10 md:mt-20">
+    <div class="w-full mx-auto lg:w-[700px] py-4 mt-10 md:mt-20 mb-4">
       <h2
-        class="text-white text-4xl font-bold text-center md:text-left md:-ml-20"
+        class="text-white text-4xl font-bold text-center md:text-left md:-ml-20 mb-4"
       >
         Agendar cita
       </h2>
+      <h3 class="text-white text-2xl md:text-left md:-ml-20 ml-4">
+        <strong>Reserva tu cita y atiéndete con nosotros!</strong>
+      </h3>
+      <p class="text-white md:text-left md:-ml-20 ml-4">
+        Estamos ubicados en el
+        <strong class="text-[#ED1CA7]">centro clínico La Esperanza</strong>
+        3er piso, 1er consultorio.
+      </p>
+
+      <p>
+        <a
+          href="https://www.google.com/maps/place/Cl%C3%ADnica+La+Esperanza,+C.A./@9.7424994,-63.1716066,17z/data=!3m1!4b1!4m6!3m5!1s0x8c3340cd4691b07f:0xb631df8000d07faf!8m2!3d9.7424941!4d-63.1690317!16s%2Fg%2F1v8x371l?entry=ttu"
+          target="_blank"
+          class="text-[#ED1CA7] font-bold md:text-left md:-ml-20 ml-4 mb-4"
+        >
+          Ver en Google Maps
+        </a>
+      </p>
+
+      <ScheduleAppointment />
     </div>
-    <ScheduleAppointment />
   </main>
 </Layout>
