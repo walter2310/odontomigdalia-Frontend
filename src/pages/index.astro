@@ -6,6 +6,7 @@ import SocialPill from "../components/SocialPill.astro";
 import Layout from "../layouts/Layout.astro";
 import ProfessionalProfile from "../components/ProfessionalProfile.astro";
 import Bento from "../components/Bento.astro";
+import ScheduleAppointment from "../components/ScheduleAppointment.astro";
 ---
 
 <Layout title="Welcome to Astro.">
@@ -61,5 +62,14 @@ import Bento from "../components/Bento.astro";
       </h2>
     </div>
     <ProfessionalProfile />
+
+    <div class="w-full mx-auto lg:w-[700px] py-4 mt-10 md:mt-20">
+      <h2
+        class="text-white text-4xl font-bold text-center md:text-left md:-ml-20"
+      >
+        Agendar cita
+      </h2>
+    </div>
+    <ScheduleAppointment />
   </main>
 </Layout>
