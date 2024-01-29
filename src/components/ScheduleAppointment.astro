@@ -1,91 +1,169 @@
-<div
-  class="w-full mx-auto lg:w-[400px] py-5 bg-white rounded-lg shadow-lg
-  lg:h-[500px] opacity-90 border-solid border-2 border-black"
+---
+import Appointment from "../icons/Appointment.astro";
+import SocialPill from "./SocialPill.astro";
+
+type Day = {
+  day: string;
+};
+
+const payloadData = await fetch("http://localhost:8080/api/hours/", {
+  method: "GET",
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
+const processRespone = payloadData.json().then((data) => {
+  return data.data.payload;
+});
+
+const avaibleDays = await processRespone;
+
+const getHourByDay = (day: string) => {
+  const response = fetch(`http://localhost:8080/api/hours/${day}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  console.log(response);
+};
+---
+
+<nav
+  class="flex justify-center mt-2 lg:justify-start cursor-pointer ml-4 md:-ml-20"
+  id="reservar-cita"
 >
-  <img src="logo.png" alt="" class="h-auto max-w-xs mx-auto block -mt-20" />
-  <form action="POST" class="flex flex-col pl-5">
-    <div class="flex flex-col justify-between">
-      <div class="flex flex-col">
-        <label class="text-xl/8">Nombre</label>
-        <input
-          class="border border-black/50 shadow-inner shadow-white/20 mb-2 px-2 py-1 rounded-lg lg:w-[230px]"
-          type="text"
-          name="name"
-          autocomplete="off"
-        />
-      </div>
-      <div class="flex flex-col mb-2 mr-10">
-        <label class="text-xl/8">Correo</label>
-        <input
-          class="border border-black/50 shadow-inner shadow-white/20 mb-2 px-2 py-1 rounded-lg lg:w-[230px]"
-          type="text"
-          name="email"
-          placeholder="ejemplo@gmail.com"
-          autocomplete="off"
-        />
-      </div>
-    </div>
+  <SocialPill>
+    <Appointment class="w-6 h-6" />
+    Reservar cita
+  </SocialPill>
+</nav>
 
-    <div class="flex flex-col justify-between">
-      <div class="flex flex-col">
-        <label class="text-xl/8">Días disponibles</label>
-        <div class="inline-block relative w-64">
-          <select
-            class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-2 py-1 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
-          >
-            <option
-              >Really long option that will likely overlap the chevron</option
-            >
-            <option>Option 2</option>
-            <option>Option 3</option>
-          </select>
-          <div
-            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
-          >
-            <svg
-              class="fill-current h-4 w-4"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-              ><path
-                d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-              ></path></svg
-            >
-          </div>
-        </div>
-      </div>
-      <div class="flex flex-col mr-3 mt-3">
-        <label class="text-xl/8">Horas disponibles</label>
-        <div class="inline-block relative w-64">
-          <select
-            class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-2 py-1 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
-          >
-            <option
-              >Really long option that will likely overlap the chevron</option
-            >
-            <option>Option 2</option>
-            <option>Option 3</option>
-          </select>
-          <div
-            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
-          >
-            <svg
-              class="fill-current h-4 w-4"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-              ><path
-                d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-              ></path></svg
-            >
-          </div>
-        </div>
-      </div>
-    </div>
-
+<!-- Primer formulario -->
+<div
+  id="formulario-container"
+  class="hidden fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded-lg shadow-lg h-[500px] w-[350px]"
+>
+  <div class="flex justify-end z-10 ml-4 md:-ml-20">
+    <!-- Botón de cerrar formulario -->
     <button
-      type="submit"
-      name="submit"
-      class="self-start mt-7 rounded-full border border-white/60 flex justify-center items-center gap-x-2 py-2 px-4 text-white mt-2 bg-[#0c0b46] hover:scale-110 hover:bg-[#0c0b46]/80 transition"
-      >Agendar</button
+      class="bg-[#0c0b46] hover:bg-[#0c0b46]/80 text-white font-bold py-2 px-4 rounded w-6 h-8 flex justify-center items-center"
+      id="cerrar-formulario"
     >
+      X
+    </button>
+  </div>
+
+  <div class="flex justify-center -mt-3">
+    <img src="logo.png" alt="Logo" class="h-auto max-w-xs block" />
+  </div>
+  <form action="#" class="flex flex-col items-center -mt-5">
+    <div class="flex flex-col">
+      <label class="text-xl/8">Nombre</label>
+      <input
+        class="border border-black/50 shadow-inner shadow-white/20 mb-2 px-2 py-1 rounded-lg lg:w-[230px]"
+        type="text"
+        name="name"
+        autocomplete="off"
+      />
+    </div>
+    <div class="flex flex-col">
+      <label class="text-xl/8">Correo</label>
+      <input
+        class="border border-black/50 shadow-inner shadow-white/20 mb-2 px-2 py-1 rounded-lg lg:w-[230px]"
+        type="text"
+        name="name"
+        autocomplete="off"
+      />
+    </div>
+    <div class="flex flex-col ml-8">
+      <label class="text-xl/8">Días disponibles</label>
+      <div class="inline-block relative w-64">
+        <select
+          class="border border-black/50 shadow-inner shadow-white/20 mb-2 px-2 py-1 rounded-lg lg:w-[230px] block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+          id="grid-state"
+        >
+          {
+            avaibleDays.map((day: Day) => {
+              return <option>{day.day}</option>;
+            })
+          }
+          <div
+            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+          >
+            <svg
+              class="fill-current h-4 w-4"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              ><path
+                d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+              ></path></svg
+            >
+          </div>
+        </select>
+      </div>
+      <div class="flex justify-center mt-3 -ml-6">
+        <button
+          type="button"
+          class="bg-[#0c0b46] hover:bg-[#0c0b46]/80 text-white font-bold py-2 px-4 rounded"
+          id="escoger-hora"
+        >
+          <strong>Escoger hora</strong>
+        </button>
+      </div>
+    </div>
   </form>
 </div>
+
+<!-- Segundo formulario -->
+<div
+  id="formulario-hora"
+  class="hidden fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded-lg shadow-lg h-[500px] w-[350px]"
+>
+  <!-- Contenido del segundo formulario -->
+  <div class="flex justify-end z-10">
+    <!-- Botón de cerrar formulario -->
+    <button
+      class="bg-[#0c0b46] hover:bg-[#0c0b46]/80 text-white font-bold py-2 px-4 rounded w-6 h-8 flex justify-center items-center"
+      id="cerrar-hora"
+    >
+      X
+    </button>
+  </div>
+  <!-- Contenido del segundo formulario ... -->
+  <h2>Segundo Formulario</h2>
+</div>
+
+<script>
+  const reservarCita = document.getElementById("reservar-cita");
+  const formularioContainer = document.getElementById("formulario-container");
+  const formularioHora = document.getElementById("formulario-hora");
+
+  const cerrarFormulario = document.getElementById("cerrar-formulario");
+  const cerrarHora = document.getElementById("cerrar-hora");
+  const escogerHoraButton = document.getElementById("escoger-hora");
+
+  reservarCita?.addEventListener("click", () => {
+    // Mostrar el primer formulario al hacer clic en el botón de reservar cita
+    formularioContainer?.classList.remove("hidden");
+  });
+
+  cerrarFormulario?.addEventListener("click", () => {
+    // Ocultar el primer formulario al hacer clic en el botón de cerrar
+    formularioContainer?.classList.add("hidden");
+  });
+
+  cerrarHora?.addEventListener("click", () => {
+    // Ocultar el segundo formulario al hacer clic en el botón de cerrar
+    formularioHora?.classList.add("hidden");
+  });
+
+  escogerHoraButton?.addEventListener("click", async () => {
+    // Mostrar el segundo formulario al hacer clic en el botón de "Escoger hora"
+    formularioHora?.classList.remove("hidden");
+    // Ocultar el primer formulario
+    formularioContainer?.classList.add("hidden");
+  });
+</script>
