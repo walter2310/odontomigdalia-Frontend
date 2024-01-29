@@ -6,29 +6,24 @@ type Day = {
   day: string;
 };
 
-const payloadData = await fetch("http://localhost:8080/api/hours/", {
-  method: "GET",
-  headers: {
-    "Content-Type": "application/json",
-  },
-});
+let avaibleDays: Day[] = [];
 
-const processRespone = payloadData.json().then((data) => {
-  return data.data.payload;
-});
-
-const avaibleDays = await processRespone;
-
-const getHourByDay = (day: string) => {
-  const response = fetch(`http://localhost:8080/api/hours/${day}`, {
+try {
+  const payloadData = await fetch("http://localhost:8080/api/hours/", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
     },
   });
 
-  console.log(response);
-};
+  const processRespone = payloadData.json().then((data) => {
+    return data.data.payload;
+  });
+
+  avaibleDays = await processRespone;
+} catch (error) {
+  console.log(error);
+}
 ---
 
 <nav
