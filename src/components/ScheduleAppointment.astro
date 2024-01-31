@@ -1,29 +1,8 @@
 ---
 import Appointment from "../icons/Appointment.astro";
 import SocialPill from "./SocialPill.astro";
-
-type Day = {
-  day: string;
-};
-
-let avaibleDays: Day[] = [];
-
-try {
-  const payloadData = await fetch("http://localhost:8080/api/hours/", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-
-  const processRespone = payloadData.json().then((data) => {
-    return data.data.payload;
-  });
-
-  avaibleDays = await processRespone;
-} catch (error) {
-  console.log(error);
-}
+import SelectHour from "./SelectHour.vue";
+import SelectDay from "./SelectDay.vue";
 ---
 
 <nav
@@ -73,41 +52,17 @@ try {
         autocomplete="off"
       />
     </div>
-    <div class="flex flex-col ml-8">
-      <label class="text-xl/8">Días disponibles</label>
-      <div class="inline-block relative w-64">
-        <select
-          class="border border-black/50 shadow-inner shadow-white/20 mb-2 px-2 py-1 rounded-lg lg:w-[230px] block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
-          id="grid-state"
-        >
-          {
-            avaibleDays.map((day: Day) => {
-              return <option>{day.day}</option>;
-            })
-          }
-          <div
-            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
-          >
-            <svg
-              class="fill-current h-4 w-4"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-              ><path
-                d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-              ></path></svg
-            >
-          </div>
-        </select>
-      </div>
-      <div class="flex justify-center mt-3 -ml-6">
-        <button
-          type="button"
-          class="bg-[#0c0b46] hover:bg-[#0c0b46]/80 text-white font-bold py-2 px-4 rounded"
-          id="escoger-hora"
-        >
-          <strong>Escoger hora</strong>
-        </button>
-      </div>
+
+    <SelectDay />
+
+    <div class="flex justify-center mt-3 -ml-6">
+      <button
+        type="button"
+        class="bg-[#0c0b46] hover:bg-[#0c0b46]/80 text-white font-bold py-2 px-4 rounded"
+        id="escoger-hora"
+      >
+        <strong>Escoger hora</strong>
+      </button>
     </div>
   </form>
 </div>
@@ -127,8 +82,7 @@ try {
       X
     </button>
   </div>
-  <!-- Contenido del segundo formulario ... -->
-  <h2>Segundo Formulario</h2>
+  <SelectHour @updateHours="updateHours" />
 </div>
 
 <script>
@@ -147,18 +101,6 @@ try {
 
   cerrarFormulario?.addEventListener("click", () => {
     // Ocultar el primer formulario al hacer clic en el botón de cerrar
-    formularioContainer?.classList.add("hidden");
-  });
-
-  cerrarHora?.addEventListener("click", () => {
-    // Ocultar el segundo formulario al hacer clic en el botón de cerrar
-    formularioHora?.classList.add("hidden");
-  });
-
-  escogerHoraButton?.addEventListener("click", async () => {
-    // Mostrar el segundo formulario al hacer clic en el botón de "Escoger hora"
-    formularioHora?.classList.remove("hidden");
-    // Ocultar el primer formulario
     formularioContainer?.classList.add("hidden");
   });
 </script>
