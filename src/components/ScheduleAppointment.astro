@@ -1,8 +1,30 @@
 ---
 import Appointment from "../icons/Appointment.astro";
 import SocialPill from "./SocialPill.astro";
-import SelectHour from "./SelectHour.vue";
-import SelectDay from "./SelectDay.vue";
+import SecondForm from "../components/subcomponents/SecondForm.astro";
+
+type Day = {
+  day: string;
+};
+
+let avaibleDays: Day[] = [];
+
+try {
+  const payloadData = await fetch("http://localhost:8080/api/hours/days", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  const processRespone = payloadData.json().then((data) => {
+    return data.data.payload;
+  });
+
+  avaibleDays = await processRespone;
+} catch (error) {
+  console.log(error);
+}
 ---
 
 <nav
@@ -53,7 +75,34 @@ import SelectDay from "./SelectDay.vue";
       />
     </div>
 
-    <SelectDay />
+    <div class="flex flex-col ml-8">
+      <label class="text-xl/8">Días disponibles</label>
+      <div class="inline-block relative w-64">
+        <select
+          class="border border-black/50 shadow-inner shadow-white/20 mb-2 px-2 py-1 rounded-lg lg:w-[230px] block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+          id="grid-state"
+        >
+          {
+            avaibleDays.map((day) => {
+              return <option>{day.day}</option>;
+            })
+          }
+          <div
+            class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
+          >
+            <svg
+              class="fill-current h-4 w-4"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+            >
+              <path
+                d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+              ></path>
+            </svg>
+          </div>
+        </select>
+      </div>
+    </div>
 
     <div class="flex justify-center mt-3 -ml-6">
       <button
@@ -68,22 +117,7 @@ import SelectDay from "./SelectDay.vue";
 </div>
 
 <!-- Segundo formulario -->
-<div
-  id="formulario-hora"
-  class="hidden fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded-lg shadow-lg h-[500px] w-[350px]"
->
-  <!-- Contenido del segundo formulario -->
-  <div class="flex justify-end z-10">
-    <!-- Botón de cerrar formulario -->
-    <button
-      class="bg-[#0c0b46] hover:bg-[#0c0b46]/80 text-white font-bold py-2 px-4 rounded w-6 h-8 flex justify-center items-center"
-      id="cerrar-hora"
-    >
-      X
-    </button>
-  </div>
-  <SelectHour @updateHours="updateHours" />
-</div>
+<SecondForm daySelected="" />
 
 <script>
   const reservarCita = document.getElementById("reservar-cita");
@@ -94,13 +128,31 @@ import SelectDay from "./SelectDay.vue";
   const cerrarHora = document.getElementById("cerrar-hora");
   const escogerHoraButton = document.getElementById("escoger-hora");
 
+  const select = document.getElementById("grid-state");
+
+  let daySelected = "";
+
+  select?.addEventListener("change", () => {
+    const selectElement = select as HTMLSelectElement;
+    daySelected = selectElement.value;
+    console.log(daySelected);
+  });
+
   reservarCita?.addEventListener("click", () => {
-    // Mostrar el primer formulario al hacer clic en el botón de reservar cita
     formularioContainer?.classList.remove("hidden");
   });
 
   cerrarFormulario?.addEventListener("click", () => {
-    // Ocultar el primer formulario al hacer clic en el botón de cerrar
     formularioContainer?.classList.add("hidden");
+  });
+
+  escogerHoraButton?.addEventListener("click", () => {
+    formularioContainer?.classList.add("hidden");
+
+    formularioHora?.classList.remove("hidden");
+  });
+
+  cerrarHora?.addEventListener("click", () => {
+    formularioHora?.classList.add("hidden");
   });
 </script>
