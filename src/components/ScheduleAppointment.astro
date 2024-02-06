@@ -5,7 +5,7 @@ import { AppointmentForm } from "./AppointmentForm.tsx";
 ---
 
 <nav
-  class="flex justify-center mt-2 lg:justify-start cursor-pointer ml-4 md:-ml-20 w-full max-w-[180px]"
+  class="flex justify-center mt-2 lg:justify-start cursor-pointer ml-4 md:-ml-20 w-full max-w-[180px] mb-10"
   id="reservar-cita"
 >
   <SocialPill>
@@ -34,30 +34,13 @@ import { AppointmentForm } from "./AppointmentForm.tsx";
 <script>
   const reservarCita = document.getElementById("reservar-cita");
   const formularioContainer = document.getElementById("formulario-container");
-
   const cerrarFormulario = document.getElementById("cerrar-formulario");
-  const escogerHoraButton = document.getElementById("escoger-hora");
-
-  const select = document.getElementById("grid-state");
-
-  let daySelected = "";
-
-  select?.addEventListener("change", () => {
-    const selectElement = select as HTMLSelectElement;
-    daySelected = selectElement.value;
-    console.log(daySelected);
-  });
 
   reservarCita?.addEventListener("click", () => {
     formularioContainer?.classList.remove("hidden");
   });
 
   cerrarFormulario?.addEventListener("click", () => {
-    formularioContainer?.classList.add("hidden");
-  });
-
-  escogerHoraButton?.addEventListener("click", () => {
-    console.log("Hice click");
     formularioContainer?.classList.add("hidden");
   });
 </script>

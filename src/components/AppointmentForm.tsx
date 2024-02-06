@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 
+const API_URL = import.meta.env.API_URL;
+
 export function AppointmentForm() {
   type Day = {
     id: number;
@@ -20,7 +22,7 @@ export function AppointmentForm() {
 
   useEffect(() => {
     // Realiza una solicitud a la API cuando el componente se monta
-    fetch("http://localhost:8080/api/hours/days")
+    fetch("https://odontomigdalia-production.up.railway.app/api/hours/days")
       .then((response) => response.json())
       .then((data) => {
         // Almacena los datos de días disponibles en el estado local del componente
@@ -38,7 +40,7 @@ export function AppointmentForm() {
   useEffect(() => {
     if (selectedDay !== "") {
       // Realiza una solicitud a la API cuando el día seleccionado cambia
-      fetch(`http://localhost:8080/api/hours?day=${selectedDay}`)
+      fetch(`https://odontomigdalia-production.up.railway.app/api/hours?day=${selectedDay}`)
         .then((response) => response.json())
         .then((data) => {
           // Almacena los datos de horas disponibles en el estado local del componente
@@ -81,7 +83,7 @@ export function AppointmentForm() {
       selectedHour,
     };
 
-    fetch("http://localhost:8080/api/appointments", {
+    fetch("https://odontomigdalia-production.up.railway.app/api/appointments", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
