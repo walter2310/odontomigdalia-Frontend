@@ -16,6 +16,7 @@ export function AppointmentForm() {
   const [selectedDay, setSelectedDay] = useState<string>("");
   const [selectedService, setSelectedService] = useState<string>("");
   const [selectedHour, setSelectedHour] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   useEffect(() => {
     // Realiza una solicitud a la API cuando el componente se monta
@@ -30,6 +31,7 @@ export function AppointmentForm() {
           "Error al obtener datos de los días disponibles de la API:",
           error
         );
+        setErrorMessage(error.message);
       });
   }, []);
 
@@ -47,6 +49,7 @@ export function AppointmentForm() {
             "Error al obtener datos de las horas disponibles de la API:",
             error
           );
+          setErrorMessage(error.message);
         });
     }
   }, [selectedDay]);
@@ -85,13 +88,20 @@ export function AppointmentForm() {
       },
       body: JSON.stringify(formData),
     })
-    console.log("Form Data:", formData);
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Error al enviar el formulario");
+        }
+      })
+      .catch((error) => {
+        setErrorMessage(error.message);
+      });
   };
 
   return (
     <>
       <div className="flex justify-center -mt-3">
-        <img src="logo.png" alt="Logo" className="h-auto max-w-xs block" />
+        <img src="logo.png" alt="Logo" className="h-auto max-w-xs block " />
       </div>
       <form action="#" className="flex flex-col items-center -mt-5">
         <div className="flex flex-col">
@@ -103,6 +113,9 @@ export function AppointmentForm() {
             name="name"
             autoComplete="off"
           />
+          {errorMessage && (
+            <p className="text-red-500 text-sm">{errorMessage}</p>
+          )}
         </div>
         <div className="flex flex-col">
           <label className="text-xl/8">Correo</label>
@@ -113,6 +126,9 @@ export function AppointmentForm() {
             name="email"
             autoComplete="off"
           />
+          {errorMessage && (
+            <p className="text-red-500 text-sm">{errorMessage}</p>
+          )}
         </div>
 
         <div className="flex flex-col ml-8">
