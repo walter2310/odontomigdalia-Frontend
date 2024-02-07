@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-
 const API_URL = import.meta.env.API_URL;
 
 export function AppointmentForm() {
@@ -75,6 +74,7 @@ export function AppointmentForm() {
   };
 
   const handleSubmit = () => {
+    const closeForm = document.getElementById("formulario-container");
     const formData = {
       name: (document.getElementById("name") as HTMLInputElement).value,
       email: (document.getElementById("email") as HTMLInputElement).value,
@@ -92,8 +92,9 @@ export function AppointmentForm() {
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error("Error al enviar el formulario");
+          throw new Error("Ingrese datos válidos");
         }
+        closeForm?.classList.add("hidden");
       })
       .catch((error) => {
         setErrorMessage(error.message);
