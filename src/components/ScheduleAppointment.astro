@@ -2,6 +2,7 @@
 import Appointment from "../icons/Appointment.astro";
 import SocialPill from "./SocialPill.astro";
 import { AppointmentForm } from "./AppointmentForm.tsx";
+import AlertModal from "./AlertModal.astro";
 ---
 
 <nav
@@ -30,6 +31,8 @@ import { AppointmentForm } from "./AppointmentForm.tsx";
 
   <AppointmentForm client:only="react" />
 </div>
+
+<AlertModal />
 
 <script>
   const reservarCita = document.getElementById("reservar-cita");

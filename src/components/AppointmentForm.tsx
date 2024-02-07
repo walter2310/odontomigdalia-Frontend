@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-const API_URL = import.meta.env.API_URL;
+
+
 
 export function AppointmentForm() {
   type Day = {
@@ -75,6 +76,8 @@ export function AppointmentForm() {
 
   const handleSubmit = () => {
     const closeForm = document.getElementById("formulario-container");
+    const successModal = document.getElementById("successModal");
+
     const formData = {
       name: (document.getElementById("name") as HTMLInputElement).value,
       email: (document.getElementById("email") as HTMLInputElement).value,
@@ -95,6 +98,8 @@ export function AppointmentForm() {
           throw new Error("Ingrese datos válidos");
         }
         closeForm?.classList.add("hidden");
+        successModal?.classList.remove("hidden");
+
       })
       .catch((error) => {
         setErrorMessage(error.message);
@@ -143,6 +148,7 @@ export function AppointmentForm() {
               onChange={handleServiceSelectChange}
             >
               <option value="">Seleccione un servicio</option>
+              <option>Consulta diagnostica</option>
               <option>Instalación de ortodoncia</option>
               <option>Blanqueamiento dental</option>
               <option>Control de ortodoncia</option>
@@ -150,7 +156,6 @@ export function AppointmentForm() {
               <option>Instalación de retenedores</option>
               <option>Carillas de cera</option>
               <option>Carillas de porcelana</option>
-              <option>Consulta diagnostica</option>
               <option>Protesis fija</option>
               <option>Caries dentales</option>
               <option>Tratamiento de conducto</option>
