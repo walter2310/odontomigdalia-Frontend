@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-
-
 export function AppointmentForm() {
   type Day = {
     id: number;
@@ -40,7 +38,9 @@ export function AppointmentForm() {
   useEffect(() => {
     if (selectedDay !== "") {
       // Realiza una solicitud a la API cuando el día seleccionado cambia
-      fetch(`https://odontomigdalia-production.up.railway.app/api/hours?day=${selectedDay}`)
+      fetch(
+        `https://odontomigdalia-production.up.railway.app/api/hours?day=${selectedDay}`
+      )
         .then((response) => response.json())
         .then((data) => {
           // Almacena los datos de horas disponibles en el estado local del componente
@@ -99,7 +99,6 @@ export function AppointmentForm() {
         }
         closeForm?.classList.add("hidden");
         successModal?.classList.remove("hidden");
-
       })
       .catch((error) => {
         setErrorMessage(error.message);
@@ -139,9 +138,9 @@ export function AppointmentForm() {
           )}
         </div>
 
-        <div className="flex flex-col ml-8">
+        <div className="flex flex-col ml-8 sm:ml-0">
           <label className="text-xl/8">Servicios</label>
-          <div className="inline-block relative w-56">
+          <div className="inline-block relative w-56 sm:w-full">
             <select
               className="border border-black/50 shadow-inner shadow-white/20 mb-2 px-2 py-1 rounded-lg lg:w-[230px] block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
               id="service-select"
@@ -166,9 +165,9 @@ export function AppointmentForm() {
           </div>
 
           <label className="text-xl/8">Días disponibles</label>
-          <div className="inline-block relative w-64">
+          <div className="inline-block relative w-64 sm:w-full">
             <select
-              className="border border-black/50 shadow-inner shadow-white/20 mb-2 px-2 py-1 rounded-lg lg:w-[230px] block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+             className="border border-black/50 shadow-inner shadow-white/20 mb-2 px-2 py-1 rounded-lg lg:w-[230px] block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
               id="day-select"
               onChange={handleDaySelectChange}
               value={selectedDay}
@@ -183,7 +182,7 @@ export function AppointmentForm() {
           </div>
 
           <label className="text-xl/8">Horas disponibles</label>
-          <div className="inline-block relative w-64">
+          <div className="inline-block relative w-64 sm:w-full">
             <select
               className="border border-black/50 shadow-inner shadow-white/20 mb-2 px-2 py-1 rounded-lg lg:w-[230px] block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
               id="hour-select"
