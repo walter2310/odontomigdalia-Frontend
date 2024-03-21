@@ -86,7 +86,7 @@ export function AppointmentForm() {
       selectedHour,
     };
 
-    fetch("https://odontomigdalia-production.up.railway.app/api/appointments", {
+    fetch(`${process.env.API_URL}/api/appointments`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -138,7 +138,7 @@ export function AppointmentForm() {
           )}
         </div>
 
-        <div className="flex flex-col ml-8 sm:ml-0">
+        <div className="flex flex-col">
           <label className="text-xl/8">Servicios</label>
           <div className="inline-block relative w-56 sm:w-full">
             <select
